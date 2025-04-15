@@ -1,0 +1,134 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Students {
+  id              Int                 @default(autoincrement()) @id
+
+  name            String
+  email           String              @unique
+  active          Boolean             @default(true)
+  phone           Int                 @unique
+  RA              Int                 @unique
+  created_at      DateTime            @default(now())
+
+  QrCode   QrCode[]
+
+  @@map("students")
+}
+
+model Academics {
+  id              Int                 @default(autoincrement()) @id
+
+  name            String
+  email           String              @unique
+  active          Boolean             @default(true)
+  phone           Int                 @unique
+  RA              Int                 @unique
+  created_at      DateTime            @default(now())
+  password        String
+
+  register        Register[]
+  @@map("academics")
+}
+
+model QrCode {
+  id              Int               @default(autoincrement()) @id
+  student_id      Int               @unique
+  laboratory_id   Int               @unique
+  sub_event_id    Int               @unique
+
+  created_at      DateTime          @default(now())
+
+  student         Students          @relation(fields: [student_id], references: [id])
+  laboratory      Laboratory        @relation(fields: [laboratory_id], references: [id])
+  sub_event       Sub_event         @relation(fields: [sub_event_id], references: [id])
+  register        Register[]
+
+  @@map("qrCode")
+}
+
+model Register {
+  id              Int               @default(autoincrement()) @id
+  qr_code_id      Int               @unique
+  academic_id     Int               @unique
+
+  qrCode          QrCode            @relation(fields: [qr_code_id], references: [id])
+  academic        Academics         @relation(fields: [academic_id], references: [id])
+  
+
+  @@map("register")
+}
+
+model Laboratory {
+  id              Int               @default(autoincrement()) @id
+  local           String?  
+  quantity        Int
+
+
+  QrCode          QrCode[]
+  advice          Advice[]
+
+  @@map("laboratory")
+}
+
+model Sub_event {
+  id              Int               @default(autoincrement()) @id
+  event_id        Int               @unique
+  group_id        Int               @unique
+  date            DateTime          
+
+  QrCode          QrCode[]
+  advice          Advice[]
+  event           Events            @relation(fields: [event_id], references: [id])
+  group           Groups            @relation(fields: [group_id], references: [id])
+
+  @@map("sub_event")
+}
+
+model Groups {
+  id              Int               @default(autoincrement()) @id
+
+  description     String
+  hour            DateTime
+
+  sub_event       Sub_event[]
+  
+  @@map("groups")
+}
+
+model Events {
+  id              Int               @default(autoincrement()) @id
+  date            DateTime          
+  description     String
+  
+  sub_event       Sub_event[]
+
+  @@map("events")
+}
+
+model Advice {
+  id              Int               @default(autoincrement()) @id
+  laboratory_id   Int               @unique
+  sub_event_id    Int               @unique
+
+  description     String
+  tier            tier              @default(low)
+
+  laboratory      Laboratory        @relation(fields: [laboratory_id], references: [id])
+  sub_event       Sub_event         @relation(fields: [sub_event_id], references: [id])
+  
+  @@map("advice")
+}
+
+enum tier {
+  low
+  medium
+  high
+}
