@@ -1,0 +1,26 @@
+@baseUrl = http://localhost:3000
+
+# @name create-academic
+
+POST {{baseUrl}}/academics
+Content-Type: application/json
+
+{
+    "name": "Jennifer Ferraz",
+    "email": "jennifer@gmail.com",
+    "phone": 967563456,
+    "RA": 694673524,
+    "password": "eBarn"
+}
+
+###
+
+# @name authentication
+
+POST {{baseUrl}}/sessions
+Content-Type: application/json
+
+{
+    "email": "jennifer@gmail.com",
+    "password": "eBarn"
+}
