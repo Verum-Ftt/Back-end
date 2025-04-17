@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config'; 
-import { PrismaService } from './prisma/prisma.service';
-import { CreateAcademicControler } from './controllers/create-academic.controller';
 import { envSchema } from './env';
 import { AuthModule } from './auth/auth.module';
+import { PrismaService } from './prisma/prisma.service';
+import { CreateEventController } from './controllers/create-event.controller';
 import { AuthenticateController } from './controllers/authenticate.controller';
+import { CreateAcademicControler } from './controllers/create-academic.controller';
 
 @Module({
   imports: [
@@ -14,7 +15,12 @@ import { AuthenticateController } from './controllers/authenticate.controller';
     }),
     AuthModule
   ],
-  controllers: [CreateAcademicControler, AuthenticateController],
+  controllers: [
+    CreateAcademicControler, 
+    AuthenticateController, 
+    CreateEventController,
+  ],
+
   providers: [PrismaService],
 })
 

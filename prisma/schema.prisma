@@ -9,7 +9,7 @@ datasource db {
 
 
 model Students {
-  id              Int                 @default(autoincrement()) @id
+  id              String              @id            @default(uuid())
 
   name            String
   email           String              @unique
@@ -24,14 +24,14 @@ model Students {
 }
 
 model Academics {
-  id              Int                 @default(autoincrement()) @id
+  id              String                @id            @default(uuid())
 
   name            String
-  email           String              @unique
-  active          Boolean             @default(true)
-  phone           Int                 @unique
-  RA              Int                 @unique
-  created_at      DateTime            @default(now())
+  email           String                @unique
+  active          Boolean               @default(true)
+  phone           Int                   @unique
+  RA              Int                   @unique
+  created_at      DateTime              @default(now())
   password        String
 
   register        Register[]
@@ -39,35 +39,35 @@ model Academics {
 }
 
 model QrCode {
-  id              Int               @default(autoincrement()) @id
-  student_id      Int               @unique
-  laboratory_id   Int               @unique
-  sub_event_id    Int               @unique
+  id              String               @id            @default(uuid())
+  student_id      String               @unique
+  laboratory_id   String               @unique
+  sub_event_id    String               @unique
 
-  created_at      DateTime          @default(now())
+  created_at      DateTime             @default(now())
 
-  student         Students          @relation(fields: [student_id], references: [id])
-  laboratory      Laboratory        @relation(fields: [laboratory_id], references: [id])
-  sub_event       Sub_event         @relation(fields: [sub_event_id], references: [id])
+  student         Students             @relation(fields: [student_id], references: [id])
+  laboratory      Laboratory           @relation(fields: [laboratory_id], references: [id])
+  sub_event       Sub_event            @relation(fields: [sub_event_id], references: [id])
   register        Register[]
 
   @@map("qrCode")
 }
 
 model Register {
-  id              Int               @default(autoincrement()) @id
-  qr_code_id      Int               @unique
-  academic_id     Int               @unique
+  id              String               @id            @default(uuid())
+  qr_code_id      String               @unique
+  academic_id     String               @unique
 
-  qrCode          QrCode            @relation(fields: [qr_code_id], references: [id])
-  academic        Academics         @relation(fields: [academic_id], references: [id])
+  qrCode          QrCode               @relation(fields: [qr_code_id], references: [id])
+  academic        Academics            @relation(fields: [academic_id], references: [id])
   
 
   @@map("register")
 }
 
 model Laboratory {
-  id              Int               @default(autoincrement()) @id
+  id              String               @id            @default(uuid())
   local           String?  
   quantity        Int
 
@@ -79,21 +79,21 @@ model Laboratory {
 }
 
 model Sub_event {
-  id              Int               @default(autoincrement()) @id
-  event_id        Int               @unique
-  group_id        Int               @unique
+  id              String               @id            @default(uuid())
+  event_id        String               @unique
+  group_id        String               @unique
   date            DateTime          
 
   QrCode          QrCode[]
   advice          Advice[]
-  event           Events            @relation(fields: [event_id], references: [id])
-  group           Groups            @relation(fields: [group_id], references: [id])
+  event           Events                @relation(fields: [event_id], references: [id])
+  group           Groups                @relation(fields: [group_id], references: [id])
 
   @@map("sub_event")
 }
 
 model Groups {
-  id              Int               @default(autoincrement()) @id
+  id              String                @id            @default(uuid())
 
   description     String
   hour            DateTime
@@ -104,7 +104,7 @@ model Groups {
 }
 
 model Events {
-  id              Int               @default(autoincrement()) @id
+  id              String                 @id            @default(uuid())
   date            DateTime          
   description     String
   
@@ -114,15 +114,15 @@ model Events {
 }
 
 model Advice {
-  id              Int               @default(autoincrement()) @id
-  laboratory_id   Int               @unique
-  sub_event_id    Int               @unique
+  id              String                @id            @default(uuid())
+  laboratory_id   String                @unique
+  sub_event_id    String                @unique
 
   description     String
-  tier            tier              @default(low)
+  tier            tier                  @default(low)
 
-  laboratory      Laboratory        @relation(fields: [laboratory_id], references: [id])
-  sub_event       Sub_event         @relation(fields: [sub_event_id], references: [id])
+  laboratory      Laboratory            @relation(fields: [laboratory_id], references: [id])
+  sub_event       Sub_event             @relation(fields: [sub_event_id], references: [id])
   
   @@map("advice")
 }

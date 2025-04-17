@@ -1,22 +1,21 @@
 @baseUrl = http://localhost:3000
+@authToken = {{authentication.response.body.acess_token}}
 
 # @name create-academic
-
 POST {{baseUrl}}/academics
 Content-Type: application/json
 
 {
     "name": "Jennifer Ferraz",
-    "email": "jennifer@gmail.com",
-    "phone": 967563456,
-    "RA": 694673524,
+    "email": "jennifer1@gmail.com",
+    "phone": 164567,
+    "RA": 67986789,
     "password": "eBarn"
 }
 
 ###
 
 # @name authentication
-
 POST {{baseUrl}}/sessions
 Content-Type: application/json
 
@@ -24,3 +23,10 @@ Content-Type: application/json
     "email": "jennifer@gmail.com",
     "password": "eBarn"
 }
+
+###
+
+# @name create_event
+POST {{baseUrl}}/event
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
