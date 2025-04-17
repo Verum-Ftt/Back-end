@@ -6,11 +6,11 @@ POST {{baseUrl}}/academics
 Content-Type: application/json
 
 {
-    "name": "Jennifer Ferraz",
-    "email": "jennifer1@gmail.com",
-    "phone": 164567,
-    "RA": 67986789,
-    "password": "eBarn"
+    "name": "Samuel",
+    "email": "samuel11@gmail.com",
+    "phone": 412342,
+    "RA": 12312412,
+    "password": "soft"
 }
 
 ###
@@ -20,8 +20,8 @@ POST {{baseUrl}}/sessions
 Content-Type: application/json
 
 {
-    "email": "jennifer@gmail.com",
-    "password": "eBarn"
+    "email": "samuel@gmail.com",
+    "password": "soft"
 }
 
 ###

@@ -1,18 +1,8 @@
-import { Body, ConflictException, Controller, HttpCode, Post, UsePipes } from "@nestjs/common";
-import { PrismaService } from "src/prisma/prisma.service";
 import { hash } from "bcryptjs";
-import { z } from "zod";
+import { PrismaService } from "src/prisma/prisma.service";
 import { ZodValidationPipe } from "src/pipes/zod-valitation-pipe";
-
-const createAcademicBodySchema = z.object({
-    name: z.string(),
-    email: z.string().email(),
-    phone: z.number(),
-    RA: z.number(),
-    password: z.string()
-}) // criar como uma interface
-
-type CreateAcademicBodySchema = z.infer<typeof createAcademicBodySchema>
+import { Body, ConflictException, Controller, HttpCode, Post, UsePipes } from "@nestjs/common";
+import { CreateAcademicBodySchema, createAcademicBodySchema } from "src/interfaces/create-academic.interfaces";
 
 @Controller('/academics')
 export class CreateAcademicControler{
@@ -22,20 +12,28 @@ export class CreateAcademicControler{
     @HttpCode(201)
     @UsePipes(new ZodValidationPipe(createAcademicBodySchema))
     async handle(@Body() body: CreateAcademicBodySchema) {
+
         const {name, email, phone, RA, password} = body
 
-        const userWithSameEmail = await this.prisma.academics.findUnique({
+        const existingAcademic = await this.prisma.academics.findFirst({ 
             where: {
-                email,
+                OR: [ { email }, { phone }, { RA } ]
             }
         })
 
-        if (userWithSameEmail) {
-            throw new ConflictException('Academic with the same e-mail address already exists.')
+        if (existingAcademic) {
+            if(existingAcademic.email === email){
+                throw new ConflictException('Academic with the same e-mail address already exists.')
+            }
+            if(existingAcademic.phone === phone){
+                throw new ConflictException('Academic with the same phone number already exists.')
+            }
+            if(existingAcademic.RA === RA){
+                throw new ConflictException('Academic with the same RA already exists.')
+            }
         }
 
         const hashedPassword = await hash(password, 8)
-
         await this.prisma.academics.create({
             data: {
                 name,

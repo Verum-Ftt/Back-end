@@ -14,8 +14,8 @@ model Students {
   name            String
   email           String              @unique
   active          Boolean             @default(true)
-  phone           Int                 @unique
-  RA              Int                 @unique
+  phone           String              @unique
+  RA              String              @unique
   created_at      DateTime            @default(now())
 
   QrCode   QrCode[]
@@ -29,8 +29,8 @@ model Academics {
   name            String
   email           String                @unique
   active          Boolean               @default(true)
-  phone           Int                   @unique
-  RA              Int                   @unique
+  phone           String                @unique
+  RA              String                @unique
   created_at      DateTime              @default(now())
   password        String
 
