@@ -10,6 +10,7 @@ datasource db {
 
 model Students {
   id              String              @id            @default(uuid())
+  subjective_id   String
 
   name            String
   email           String              @unique
@@ -17,6 +18,9 @@ model Students {
   phone           String              @unique
   RA              String              @unique
   created_at      DateTime            @default(now())
+  period          String
+  course          String
+  class           String
 
   QrCode   QrCode[]
 
@@ -36,14 +40,15 @@ model Academics {
 
   register        Register[]
   sub_event       Sub_event[]
+  events          Events[]
   @@map("academics")
 }
 
 model QrCode {
-  id              String               @id            @default(uuid())
-  student_id      String               @unique
-  laboratory_id   String               @unique
-  sub_event_id    String               @unique
+  id              String               @id             @default(uuid())
+  student_id      String               
+  laboratory_id   String               
+  sub_event_id    String               
 
   created_at      DateTime             @default(now())
 
@@ -56,9 +61,9 @@ model QrCode {
 }
 
 model Register {
-  id              String               @id            @default(uuid())
-  qr_code_id      String               @unique
-  academic_id     String               @unique
+  id              String               @id             @default(uuid())
+  qr_code_id      String               
+  academic_id     String               
 
   qrCode          QrCode               @relation(fields: [qr_code_id], references: [id])
   academic        Academics            @relation(fields: [academic_id], references: [id])
@@ -68,7 +73,7 @@ model Register {
 }
 
 model Laboratory {
-  id              String               @id            @default(uuid())
+  id              String               @id             @default(uuid())
   local           String?  
   quantity        Int
 
@@ -80,41 +85,45 @@ model Laboratory {
 }
 
 model Sub_event {
-  id              String               @id            @default(uuid())
-  event_id        String               @unique
-  group_id        String               @unique
-  date            DateTime
-  date_created    DateTime             @default(now())
-  created_by      String               @unique          
+  id                   String                  @id             @default(uuid())
+  created_by           String                  
+
+  event_id             String                  
+  subjective_id        String                  
+  date                 DateTime
+  date_created         DateTime                @default(now())         
 
   QrCode          QrCode[]
   advice          Advice[]
 
-  academic        Academics            @relation(fields: [created_by], references: [id])
-  event           Events               @relation(fields: [event_id], references: [id])
-  group           Groups               @relation(fields: [group_id], references: [id])
+  academic                Academics            @relation(fields: [created_by], references: [id])
+  event                   Events               @relation(fields: [event_id], references: [id])
+  students_subjectives    Students_subjective  @relation(fields: [subjective_id], references: [id])
 
   @@map("sub_event")
 }
 
-model Groups {
-  id              String               @id            @default(uuid())
+model Students_subjective {
+  id              String               @id             @default(uuid())
 
   description     String
-  hour            DateTime
+  season          String
 
   sub_event       Sub_event[]
   
-  @@map("groups")
+  @@map("students_subjectives")
 }
 
 model Events {
   id              String                @id            @default(uuid())
+  created_by      String                
+
   date            DateTime          
   description     String
-  date_created    DateTime              @default(now())          
+  date_created    DateTime              @default(now())                          
   
-  sub_event       Sub_event[]
+  sub_event               Sub_event[]
+  academic                Academics     @relation(fields: [created_by], references: [id])
 
   @@map("events")
 }
