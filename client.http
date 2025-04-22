@@ -8,8 +8,8 @@ Content-Type: application/json
 {
     "name": "Samuel",
     "email": "samuel11@gmail.com",
-    "phone": 412342,
-    "RA": 12312412,
+    "phone": "412342",
+    "RA": "456467",
     "password": "soft"
 }
 
@@ -30,3 +30,8 @@ Content-Type: application/json
 POST {{baseUrl}}/event
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
+
+{
+    "description": "Evento da semana 11",
+    "date": 2025-04-17
+}

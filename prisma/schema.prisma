@@ -35,6 +35,7 @@ model Academics {
   password        String
 
   register        Register[]
+  sub_event       Sub_event[]
   @@map("academics")
 }
 
@@ -82,18 +83,22 @@ model Sub_event {
   id              String               @id            @default(uuid())
   event_id        String               @unique
   group_id        String               @unique
-  date            DateTime          
+  date            DateTime
+  date_created    DateTime             @default(now())
+  created_by      String               @unique          
 
   QrCode          QrCode[]
   advice          Advice[]
-  event           Events                @relation(fields: [event_id], references: [id])
-  group           Groups                @relation(fields: [group_id], references: [id])
+
+  academic        Academics            @relation(fields: [created_by], references: [id])
+  event           Events               @relation(fields: [event_id], references: [id])
+  group           Groups               @relation(fields: [group_id], references: [id])
 
   @@map("sub_event")
 }
 
 model Groups {
-  id              String                @id            @default(uuid())
+  id              String               @id            @default(uuid())
 
   description     String
   hour            DateTime
@@ -104,9 +109,10 @@ model Groups {
 }
 
 model Events {
-  id              String                 @id            @default(uuid())
+  id              String                @id            @default(uuid())
   date            DateTime          
   description     String
+  date_created    DateTime              @default(now())          
   
   sub_event       Sub_event[]
 

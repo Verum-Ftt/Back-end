@@ -13,7 +13,7 @@ export class CreateAcademicControler{
     @UsePipes(new ZodValidationPipe(createAcademicBodySchema))
     async handle(@Body() body: CreateAcademicBodySchema) {
 
-        const {name, email, phone, RA, password} = body
+        const { name, email, phone, RA, password } = body
 
         const existingAcademic = await this.prisma.academics.findFirst({ 
             where: {
