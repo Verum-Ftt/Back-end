@@ -7,9 +7,9 @@ Content-Type: application/json
 
 {
     "name": "Samuel",
-    "email": "samuel11@gmail.com",
-    "phone": "412342",
-    "RA": "456467",
+    "email": "samuel13@gmail.com",
+    "phone": "5676574",
+    "RA": "45675745",
     "password": "soft"
 }
 
@@ -20,7 +20,7 @@ POST {{baseUrl}}/sessions
 Content-Type: application/json
 
 {
-    "email": "samuel@gmail.com",
+    "email": "samuel13@gmail.com",
     "password": "soft"
 }
 
@@ -32,6 +32,6 @@ Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-    "description": "Evento da semana 11",
-    "date": 2025-04-17
+    "description": "Evento da semana 21",
+    "date": "2020-01-11T00:00:00.123Z"
 }

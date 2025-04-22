@@ -3,7 +3,7 @@ import { UserPayload } from 'src/auth/jwt.strategy';
 import { PrismaService } from "src/prisma/prisma.service";
 import { CurrentUser } from "src/auth/current-user-decorator";
 import { ZodValidationPipe } from "src/pipes/zod-valitation-pipe";
-import { Body, Controller, Post, UseGuards, UsePipes } from "@nestjs/common";
+import { Body, Controller, Post, UseGuards } from "@nestjs/common";
 import { createEventBodySchema, CreateEventBodySchema } from "src/interfaces/create_event.interfaces";
 
 @Controller('/event')
@@ -12,22 +12,19 @@ export class CreateEventController{
     constructor( private prisma: PrismaService ) {}
 
     @Post()
-    @UsePipes(new ZodValidationPipe(createEventBodySchema))
     async handle(
         @CurrentUser() user: UserPayload,
-        @Body() body: CreateEventBodySchema ){
+        @Body( new ZodValidationPipe(createEventBodySchema) ) body: CreateEventBodySchema ){
 
         const { description, date } = body
-        const academicId = user.sub
+        const { sub: userId} = user
 
         await this.prisma.events.create({
             data: {
+                created_by: userId,
                 description,
                 date,
-                // created_by: academicId,
             }
         })
-        console.log(user.sub)
-        return 'Hello World'
     }
 }
