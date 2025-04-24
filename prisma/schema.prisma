@@ -122,8 +122,8 @@ model Events {
   description     String
   date_created    DateTime              @default(now())                          
   
-  sub_event               Sub_event[]
-  academic                Academics     @relation(fields: [created_by], references: [id])
+  sub_event       Sub_event[]
+  academic        Academics     @relation(fields: [created_by], references: [id])
 
   @@map("events")
 }

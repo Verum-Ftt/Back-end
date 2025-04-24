@@ -6,7 +6,7 @@ import { ZodValidationPipe } from "src/pipes/zod-valitation-pipe";
 import { Body, Controller, Post, UseGuards } from "@nestjs/common";
 import { createEventBodySchema, CreateEventBodySchema } from "src/interfaces/create_event.interfaces";
 
-@Controller('/event')
+@Controller('/events')
 @UseGuards(AuthGuard('jwt'))
 export class CreateEventController{
     constructor( private prisma: PrismaService ) {}
