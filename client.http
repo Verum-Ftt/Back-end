@@ -32,7 +32,7 @@ Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-    "description": "Evento da semana 31",
+    "description": "Evento da semana 5345",
     "date": "2020-01-11T00:00:00.123Z"
 }
 
@@ -40,7 +40,7 @@ Authorization: Bearer {{authToken}}
 
 # @name fecth_event
 
-GET {{baseUrl}}/events/get
+GET {{baseUrl}}/events/get?page=1
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 

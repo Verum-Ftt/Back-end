@@ -1,9 +1,9 @@
 import { compare } from "bcryptjs";
 import { JwtService } from "@nestjs/jwt";
-import { PrismaService } from "src/prisma/prisma.service";
-import { ZodValidationPipe } from "src/pipes/zod-valitation-pipe";
+import { PrismaService } from "@/prisma/prisma.service";
+import { ZodValidationPipe } from "@/pipes/zod-valitation-pipe";
 import { Body, Controller, Post, UnauthorizedException, UsePipes } from "@nestjs/common";
-import { AuthenticateBodySchema, authenticateBodySchema } from "src/interfaces/authenticate.interfaces";
+import { AuthenticateBodySchema, authenticateBodySchema } from "@/interfaces/authenticate.interfaces";
 
 @Controller('/sessions')
 export class AuthenticateController{
