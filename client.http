@@ -7,9 +7,9 @@ Content-Type: application/json
 
 {
     "name": "Samuel",
-    "email": "samuel13@gmail.com",
-    "phone": "5676574",
-    "RA": "45675745",
+    "email": "samuel3@gmail.com",
+    "phone": "2655467",
+    "RA": "09876858",
     "password": "soft"
 }
 
