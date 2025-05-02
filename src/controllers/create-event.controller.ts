@@ -17,7 +17,7 @@ export class CreateEventController{
         @Body( new ZodValidationPipe(createEventBodySchema) ) body: CreateEventBodySchema ){
 
         const { description, date } = body
-        const { sub: userId} = user
+        const { sub: userId } = user
 
         await this.prisma.events.create({
             data: {

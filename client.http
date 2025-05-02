@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3000
-@authToken = {{authentication.response.body.acess_token}}
+@authToken = {{authentication.response.body.access_token}}
 
 # @name create-academic
 POST {{baseUrl}}/academics
@@ -20,7 +20,7 @@ POST {{baseUrl}}/sessions
 Content-Type: application/json
 
 {
-    "email": "samuel13@gmail.com",
+    "email": "samuel3@gmail.com",
     "password": "soft"
 }
 

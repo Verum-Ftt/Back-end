@@ -7,7 +7,7 @@ export default defineConfig({
     include: ['**/*.e2e-spec.ts'],
     globals: true,
     root: './',
-    setupFiles: ['./test/setup-e2e.ts']
+    setupFiles: ['./test/setup-e2e.ts'] // sempre quando um teste unitario for executado esse arquivo sera antes 
   },
   plugins: [
     tsConfigPaths(),

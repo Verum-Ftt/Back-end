@@ -87,9 +87,11 @@ model Laboratory {
 model Sub_event {
   id                   String                  @id             @default(uuid())
   created_by           String                  
-
   event_id             String                  
-  subjective_id        String                  
+  subjective_id        String
+
+  title                String
+  description          String                  
   date                 DateTime
   date_created         DateTime                @default(now())         
 
@@ -118,6 +120,7 @@ model Events {
   id              String                @id            @default(uuid())
   created_by      String                
 
+  title           String
   date            DateTime          
   description     String
   date_created    DateTime              @default(now())                          
