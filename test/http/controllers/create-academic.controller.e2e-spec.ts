@@ -2,7 +2,7 @@ import request from "supertest"
 import { Test } from "@nestjs/testing";
 import { AppModule } from "@/app.module";
 import { INestApplication } from "@nestjs/common";
-import { PrismaService } from "@/prisma/prisma.service";
+import { PrismaService } from "@/application/prisma/prisma.service";
 
 
 describe('Create academic (E2E)', () => {

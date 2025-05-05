@@ -3,10 +3,10 @@ import { Test } from "@nestjs/testing";
 import { JwtService } from "@nestjs/jwt";
 import { AppModule } from "@/app.module";
 import { INestApplication } from "@nestjs/common";
-import { PrismaService } from "@/prisma/prisma.service";
+import { PrismaService } from "@/application/prisma/prisma.service";
 
 
-describe('Create events (E2E)', () => {
+describe('Fetch events (E2E)', () => {
     let app: INestApplication;
     let prisma: PrismaService;
     let jwt: JwtService
@@ -23,7 +23,7 @@ describe('Create events (E2E)', () => {
         await app.init();
       });
 
-    test('[POST] /events', async () => {
+    test('[GET] /events/get', async () => {
         const academic = await prisma.academics.create({
             data:{
                 name: 'Jhon Doe',
@@ -36,23 +36,35 @@ describe('Create events (E2E)', () => {
         
         const access_token = jwt.sign({ sub: academic.id })
 
-        const response = await request(app.getHttpServer())
-          .post('/events')
-          .set('Authorization', `Bearer ${access_token}`)
-          .send({
+        await prisma.events.createMany({
+          data: [
+            {
               description: 'Evento da semana 007',
               date: '2020-01-11T00:00:00.123Z',
               created_by: academic.id,
-          })
-
-        expect(response.status).toBe(201) 
-
-        const eventOnDatabase = await prisma.events.findFirst({
-          where: {
-            description: 'Evento da semana 007',
-          }
+            },
+            {
+              description: 'Evento da semana 008',
+              date: '2020-01-11T00:00:00.123Z',
+              created_by: academic.id,
+            },
+            {
+              description: 'Evento da semana 009',
+              date: '2020-01-11T00:00:00.123Z',
+              created_by: academic.id,
+            }
+          ]
         })
 
-        expect(eventOnDatabase).toBeTruthy()
+        const response = await request(app.getHttpServer()).get('/events/get').set('Authorization', `Bearer ${ access_token }`)
+
+        expect(response.status).toBe(200) 
+        expect(response.body).toEqual({
+          events: [
+            expect.objectContaining({ description: 'Evento da semana 007' }),
+            expect.objectContaining({ description: 'Evento da semana 008' }),
+            expect.objectContaining({ description: 'Evento da semana 009' })
+          ],
+        })
     })
 })
