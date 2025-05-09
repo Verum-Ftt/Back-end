@@ -6,11 +6,11 @@ POST {{baseUrl}}/academics
 Content-Type: application/json
 
 {
-    "name": "Samuel",
-    "email": "samuel3@gmail.com",
-    "phone": "2655467",
-    "RA": "09876858",
-    "password": "soft"
+    "name": "Joao gomes",
+    "email": "Joao@gmail.com",
+    "phone": "1234476",
+    "RA": "0896867",
+    "password": "tralale"
 }
 
 ###
@@ -20,8 +20,8 @@ POST {{baseUrl}}/sessions
 Content-Type: application/json
 
 {
-    "email": "samuel3@gmail.com",
-    "password": "soft"
+    "email": "Joao@gmail.com",
+    "password": "tralale"
 }
 
 ###
@@ -32,8 +32,8 @@ Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-    "description": "Evento da semana 5345",
-    "date": "2020-01-11T00:00:00.123Z"
+    "description": "Evento da semana 65",
+    "date": "2020-01-19T00:00:00.123Z"
 }
 
 ###
@@ -44,4 +44,23 @@ GET {{baseUrl}}/events/get?page=1
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
+###
 
+# @name create_laboratory
+
+POST {{baseUrl}}/laboratory/post
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "local": "Laboratório FTT",
+    "quanity": 50
+}
+
+###
+
+# @name fecth-laboratory
+
+GET {{baseUrl}}/laboratory/get?page=1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}

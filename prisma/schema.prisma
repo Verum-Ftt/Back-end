@@ -76,6 +76,7 @@ model Laboratory {
   id              String               @id             @default(uuid())
   local           String?  
   quantity        Int
+  date_created    DateTime             @default(now())
 
 
   QrCode          QrCode[]
