@@ -1,66 +1,122 @@
 @baseUrl = http://localhost:3000
 @authToken = {{authentication.response.body.access_token}}
+@academicId = 5f9815d1-e8ee-4cc2-b828-916a48060a14
+@eventId = 56e650e6-30ff-4216-ada4-faab83e6bdb1
+@laboratoryId = cec418b8-3f1c-4955-9cfc-eb1e7c0fafb7
+@subjectiveId = b2511595-252a-4bf8-b23e-31708687509d
+@subEventId = e88c6d34-4988-45be-9a0f-a9508d174b91
 
-# @name create-academic
-POST {{baseUrl}}/academics
+### Criar um acadêmico
+# @name create_academic
+POST {{baseUrl}}/academics/create
 Content-Type: application/json
 
 {
-    "name": "Joao gomes",
-    "email": "Joao@gmail.com",
-    "phone": "1234476",
-    "RA": "0896867",
-    "password": "tralale"
+  "name": "Ana Costa",
+  "email": "ana.coosstaa@email.com",
+  "phone": "12999001",
+  "RA": "202135",
+  "password": "senha123"
 }
 
-###
-
+### Autenticar o acadêmico
 # @name authentication
 POST {{baseUrl}}/sessions
 Content-Type: application/json
 
 {
-    "email": "Joao@gmail.com",
-    "password": "tralale"
+  "email": "ana.costa@email.com",
+  "password": "senha123"
 }
 
-###
-
+### Criar um evento (não depende de nada além da autenticação)
 # @name create_event
-POST {{baseUrl}}/events
+POST {{baseUrl}}/events/create
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-    "description": "Evento da semana 65",
-    "date": "2020-01-19T00:00:00.123Z"
+  "title": "teste",
+  "description": "Evento anual da faculdade",
+  "date": "2025-10-01T00:00:00.000Z"
 }
 
-###
-
+### Visualização de todos os events
 # @name fecth_event
-
-GET {{baseUrl}}/events/get?page=1
+GET  {{baseUrl}}/events/findAll?page=1
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
-###
 
+### Criar um laboratório
 # @name create_laboratory
-
-POST {{baseUrl}}/laboratory/post
+POST {{baseUrl}}/laboratory/create
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-    "local": "Laboratório FTT",
-    "quanity": 50
+  "local": "Laboratório A101",
+  "quanity": 40
+}
+
+### Visualizar todos os laboratórios
+# @name fecth_laboratory
+GET {{baseUrl}}/laboratory/findAll?page=1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+
+### Criar um Students_subjectives (relacionado ao acadêmico)
+# @name create_subjective
+POST {{baseUrl}}/students-subjectives/create
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "title": "Árvores e Grafos",
+  "description": "Árvores e Grafos",
+  "season": "2025/2"
 }
 
 ###
+# @name fecth_subjective
+GET {{baseUrl}}/students-subjectives/findAll?page=1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
 
-# @name fecth-laboratory
 
-GET {{baseUrl}}/laboratory/get?page=1
+### Criar um Sub_event (depende do evento e do subjective)
+# @name create_sub_event
+POST {{baseUrl}}/sub-events/create/{{eventId}}/{{subjectiveId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "title": "teste",
+  "description": "Apresentação final dos TCCs",
+  "date": "2025-10-01T00:00:00.000Z"
+}
+
+###
+# @name fecth_sub_event
+GET {{baseUrl}}/sub-events/findAll?page=1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+
+###
+# @name create_advice
+POST {{baseUrl}}/advices/create/{{laboratoryId}}/{{subEventId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "description": "Testes",
+  "tier": "low"
+}
+
+###
+# @name fecth_sub_event
+GET {{baseUrl}}/advices/findAll?page=1
 Content-Type: application/json
 Authorization: Bearer {{authToken}}

@@ -10,8 +10,8 @@ import { createLaboratory, CreateLaboratoryBodySchema } from "./dtos/create-labo
 export class LaboratoryController{
     constructor( private prisma: PrismaService ) {}
 
-    @Post('/post')
-    async postAcademic(
+    @Post('/create')
+    async postLaboratory(
         @Body( new ZodValidationPipe(createLaboratory) ) body: CreateLaboratoryBodySchema ){
 
         const { local, quantity } = body
@@ -24,7 +24,7 @@ export class LaboratoryController{
         })
     }
 
-        @Get('/get')
+        @Get('/findAll')
         async getAllLaboratory(@Query('page', new ZodValidationPipe(pageQueryParamSchema) ) page: PageQueryParamSchema) {
             const perPage = 20
             const laboratory = await this.prisma.laboratory.findMany({
