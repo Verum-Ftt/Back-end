@@ -1,8 +1,8 @@
 import { AuthGuard } from "@nestjs/passport";
-import { UserPayload } from "@/infrastructure/auth/jwt.strategy";
+import { UserPayload } from "@/infrastructure/auth/guards/jwt.strategy";
 import { PrismaService } from "@/infrastructure/prisma/prisma.service";
 import { ZodValidationPipe } from "@/interfaces/pipes/zod-valitation-pipe";
-import { CurrentUser } from "../../../infrastructure/auth/current-user.decorator";
+import { CurrentUser } from "../../../infrastructure/auth/decorators/current-user.decorator";
 import { PageQueryParamSchema, pageQueryParamSchema } from "./dtos/fecth-advice.dto";
 import { Body, Controller, Get, Param, Post, Query, UseGuards } from "@nestjs/common";
 import { createAdviceBodySchema, CreateAdviceBodySchema } from "./dtos/create-advice.dto";

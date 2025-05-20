@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { EventModule } from './http/event/event.module';
 import { AdviceModule } from './http/advice/advice.module';
-import { AuthModule } from '../infrastructure/auth/auth.module';
+import { AuthModule } from './http/auth/auth.module';
 import { SubEventModule } from './http/sub-event/sub-event.module';
 import { AcademicModule } from './http/academics/academics.module';
 import { LaboratoryModule } from './http/laboratory/laboratory.module';

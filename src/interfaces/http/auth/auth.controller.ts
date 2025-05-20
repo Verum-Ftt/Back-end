@@ -3,7 +3,7 @@ import { JwtService } from "@nestjs/jwt";
 import { PrismaService } from "@/infrastructure/prisma/prisma.service";
 import { ZodValidationPipe } from "@/interfaces/pipes/zod-valitation-pipe";
 import { Body, Controller, Post, UnauthorizedException, UsePipes } from "@nestjs/common";
-import { AuthenticateBodySchema, authenticateBodySchema } from "@/infrastructure/auth/dtos/authenticate.dtos";
+import { AuthenticateBodySchema, authenticateBodySchema } from "@/interfaces/http/auth/dtos/authenticate.dtos";
 
 @Controller('/sessions')
 export class AuthenticateController{

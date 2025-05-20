@@ -78,7 +78,7 @@ Authorization: Bearer {{authToken}}
   "season": "2025/2"
 }
 
-###
+### Visualização de subjectives
 # @name fecth_subjective
 GET {{baseUrl}}/students-subjectives/findAll?page=1
 Content-Type: application/json
@@ -97,14 +97,14 @@ Authorization: Bearer {{authToken}}
   "date": "2025-10-01T00:00:00.000Z"
 }
 
-###
+### Visualização de sub_events
 # @name fecth_sub_event
 GET {{baseUrl}}/sub-events/findAll?page=1
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 
-###
+### Criação de um advice
 # @name create_advice
 POST {{baseUrl}}/advices/create/{{laboratoryId}}/{{subEventId}}
 Content-Type: application/json
@@ -115,7 +115,7 @@ Authorization: Bearer {{authToken}}
   "tier": "low"
 }
 
-###
+### Visualização de advices
 # @name fecth_sub_event
 GET {{baseUrl}}/advices/findAll?page=1
 Content-Type: application/json

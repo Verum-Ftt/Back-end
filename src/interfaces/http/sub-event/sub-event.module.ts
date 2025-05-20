@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { envSchema } from "../../../env";
 import { ConfigModule } from "@nestjs/config"; 
 import { SubEventController } from "./sub-event.controller"
-import { AuthModule } from '../../../infrastructure/auth/auth.module';
+import { AuthModule } from '../auth/auth.module';
 import { PrismaService } from "../../../infrastructure/prisma/prisma.service";
 
 @Module({
