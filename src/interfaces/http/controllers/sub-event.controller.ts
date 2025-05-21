@@ -1,12 +1,12 @@
 import { AuthGuard } from "@nestjs/passport";
 import { UserPayload } from "@/infrastructure/auth/guards/jwt.strategy";
 import { PrismaService } from "@/infrastructure/prisma/prisma.service";
-import { ZodValidationPipe } from "@/interfaces/pipes/zod-valitation-pipe";
-import { PageQueryParamSchema, pageQueryParamSchema } from "./dtos/fecth-sub.dto";
-import { CurrentUser } from "../../../infrastructure/auth/decorators/current-user.decorator";
+import { ZodValidationPipe } from "@/interfaces/http/pipes/zod-valitation-pipe";
 import { Body, Controller, Get, Param, Post, Query, UseGuards } from "@nestjs/common";
-import { createSubEventBodySchema, CreateSubEventBodySchema } from "./dtos/create-sub.dto";
-import { CreateSubEventParamSchema, createSubEventParamSchema } from "./dtos/params-sub.dto";
+import { PageQueryParamSchema, pageQueryParamSchema } from "./../dtos/page-query-params";
+import { CurrentUser } from "../../../infrastructure/auth/decorators/current-user.decorator";
+import { createSubEventBodySchema, CreateSubEventBodySchema } from "./../dtos/create-sub.dto";
+import { CreateSubEventParamSchema, createSubEventParamSchema } from "./../dtos/params-sub.dto";
 
 @Controller('/sub-events')
 @UseGuards(AuthGuard('jwt'))

@@ -1,10 +1,10 @@
 @baseUrl = http://localhost:3000
 @authToken = {{authentication.response.body.access_token}}
 @academicId = 5f9815d1-e8ee-4cc2-b828-916a48060a14
-@eventId = 56e650e6-30ff-4216-ada4-faab83e6bdb1
-@laboratoryId = cec418b8-3f1c-4955-9cfc-eb1e7c0fafb7
-@subjectiveId = b2511595-252a-4bf8-b23e-31708687509d
-@subEventId = e88c6d34-4988-45be-9a0f-a9508d174b91
+@eventId = 5d1158b5-66da-4841-be9c-5e1782c51fc6
+@laboratoryId = bffcfcb8-ed2f-4324-b1c4-0198cacfe2c3
+@subjectiveId = 5bc53c75-fcb4-4430-89cc-48c5515f725e
+@subEventId = 4a25e69b-dd44-4178-9e6a-217bd9d3e08b
 
 ### Criar um acadêmico
 # @name create_academic
@@ -25,7 +25,7 @@ POST {{baseUrl}}/sessions
 Content-Type: application/json
 
 {
-  "email": "ana.costa@email.com",
+  "email": "ana.coosstaa@email.com",
   "password": "senha123"
 }
 
@@ -116,7 +116,7 @@ Authorization: Bearer {{authToken}}
 }
 
 ### Visualização de advices
-# @name fecth_sub_event
+# @name fecth_advice
 GET {{baseUrl}}/advices/findAll?page=1
 Content-Type: application/json
 Authorization: Bearer {{authToken}}

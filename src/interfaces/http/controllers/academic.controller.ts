@@ -1,8 +1,8 @@
 import { hash } from "bcryptjs";
 import { PrismaService } from "@/infrastructure/prisma/prisma.service";
-import { ZodValidationPipe } from "@/interfaces/pipes/zod-valitation-pipe";
+import { ZodValidationPipe } from "@/interfaces/http/pipes/zod-valitation-pipe";
 import { Body, ConflictException, Controller, HttpCode, Post } from "@nestjs/common";
-import { CreateAcademicBodySchema, createAcademicBodySchema } from "./dtos/create-academic.dto";
+import { CreateAcademicBodySchema, createAcademicBodySchema } from "./../dtos/create-academic.dto";
 
 @Controller('/academics')
 export class AcademicController{

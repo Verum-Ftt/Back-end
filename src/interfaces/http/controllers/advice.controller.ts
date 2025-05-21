@@ -1,12 +1,12 @@
 import { AuthGuard } from "@nestjs/passport";
 import { UserPayload } from "@/infrastructure/auth/guards/jwt.strategy";
 import { PrismaService } from "@/infrastructure/prisma/prisma.service";
-import { ZodValidationPipe } from "@/interfaces/pipes/zod-valitation-pipe";
-import { CurrentUser } from "../../../infrastructure/auth/decorators/current-user.decorator";
-import { PageQueryParamSchema, pageQueryParamSchema } from "./dtos/fecth-advice.dto";
+import { ZodValidationPipe } from "@/interfaces/http/pipes/zod-valitation-pipe";
 import { Body, Controller, Get, Param, Post, Query, UseGuards } from "@nestjs/common";
-import { createAdviceBodySchema, CreateAdviceBodySchema } from "./dtos/create-advice.dto";
-import { CreateAdviceParamSchema, createAdviceParamSchema } from "./dtos/param-advice.dto";
+import { PageQueryParamSchema, pageQueryParamSchema } from "../dtos/page-query-params";
+import { CurrentUser } from "../../../infrastructure/auth/decorators/current-user.decorator";
+import { createAdviceBodySchema, CreateAdviceBodySchema } from "./../dtos/create-advice.dto";
+import { CreateAdviceParamSchema, createAdviceParamSchema } from "./../dtos/param-advice.dto";
 
 @Controller('/advices')
 @UseGuards(AuthGuard('jwt'))

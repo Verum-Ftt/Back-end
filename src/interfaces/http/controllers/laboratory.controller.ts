@@ -1,9 +1,9 @@
 import { AuthGuard } from "@nestjs/passport";
 import { PrismaService } from "@/infrastructure/prisma/prisma.service";
-import { ZodValidationPipe } from "@/interfaces/pipes/zod-valitation-pipe";
+import { ZodValidationPipe } from "@/interfaces/http/pipes/zod-valitation-pipe";
 import { Body, Controller, Get, Post, Query, UseGuards } from "@nestjs/common";
-import { pageQueryParamSchema, PageQueryParamSchema } from "./dtos/fecth-laboratory.dto"
-import { createLaboratory, CreateLaboratoryBodySchema } from "./dtos/create-laboratory.dto";
+import { pageQueryParamSchema, PageQueryParamSchema } from "./../dtos/page-query-params"
+import { createLaboratory, CreateLaboratoryBodySchema } from "./../dtos/create-laboratory.dto";
 
 @Controller('/laboratory')
 @UseGuards(AuthGuard('jwt'))

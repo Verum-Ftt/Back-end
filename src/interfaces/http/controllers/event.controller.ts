@@ -1,11 +1,11 @@
 import { AuthGuard } from "@nestjs/passport";
 import { UserPayload } from "@/infrastructure/auth/guards/jwt.strategy";
 import { PrismaService } from "@/infrastructure/prisma/prisma.service";
-import { ZodValidationPipe } from "@/interfaces/pipes/zod-valitation-pipe";
-import { CurrentUser } from "../../../infrastructure/auth/decorators/current-user.decorator";
+import { ZodValidationPipe } from "@/interfaces/http/pipes/zod-valitation-pipe";
 import { Body, Controller, Get, Post, Query, UseGuards } from "@nestjs/common";
-import { PageQueryParamSchema, pageQueryParamSchema } from "./dtos/fecth-event.dto";
-import { createEventBodySchema, CreateEventBodySchema } from "./dtos/create-event.dto";
+import { PageQueryParamSchema, pageQueryParamSchema } from "./../dtos/page-query-params";
+import { createEventBodySchema, CreateEventBodySchema } from "./../dtos/create-event.dto";
+import { CurrentUser } from "../../../infrastructure/auth/decorators/current-user.decorator";
 
 @Controller('/events')
 @UseGuards(AuthGuard('jwt'))
@@ -42,6 +42,6 @@ export class EventController{
                 orderBy: { date_created: "desc" }
             })
     
-            return { events }
+            return { events: events }
         }
 }
