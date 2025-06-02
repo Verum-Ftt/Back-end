@@ -3,7 +3,7 @@ import { Test } from "@nestjs/testing";
 import { JwtService } from "@nestjs/jwt";
 import { AppModule } from "@/app.module";
 import { INestApplication } from "@nestjs/common";
-import { PrismaService } from "@/infrastructure/prisma/prisma.service";
+import { PrismaService } from "@/infrastructure/database/prisma/prisma.service";
 
 
 describe('Create events (E2E)', () => {

@@ -1,29 +1,15 @@
 import { Module } from '@nestjs/common';
-import { AdviceController } from './controllers/advice.controller';
-import { EventController } from './controllers/event.controller';
-import { AuthenticateController } from './controllers/auth.controller';
-import { AcademicController } from './controllers/academic.controller';
-import { PrismaService } from '@/infrastructure/prisma/prisma.service';
-import { SubEventController } from './controllers/sub-event.controller';
-import { LaboratoryController } from './controllers/laboratory.controller';
-import { StudentsSubjectivesController } from './controllers/students-subjective.controller';
-import { AuthModule } from '@/infrastructure/auth/auth.module';
+import { PrismaService } from '@/infrastructure/database/prisma/prisma.service';
+import { AuthModule } from '@/interfaces/http/auth/auth.module';
+import { ModulesModule } from './modules/modules.module';
 
 @Module({
-  imports: [],
+  imports: [ AuthModule, ModulesModule ],
 
-  controllers: [
-    AcademicController,
-    AdviceController,
-    AuthenticateController,
-    EventController,
-    LaboratoryController,
-    StudentsSubjectivesController,
-    SubEventController
-  ],
+  controllers: [],
 
   providers:[ PrismaService ]
 })
 
 
-export class ControllerModule {}
+export class HttpModule {}

@@ -13,10 +13,10 @@ Content-Type: application/json
 
 {
   "name": "Ana Costa",
-  "email": "ana.coosstaa@email.com",
-  "phone": "12999001",
-  "RA": "202135",
-  "password": "senha123"
+  "email": "ana.costar@email.com",
+  "phone": "00000000000000001",
+  "RA": "1235465612",
+  "password": "senha1233"
 }
 
 ### Autenticar o acadêmico
