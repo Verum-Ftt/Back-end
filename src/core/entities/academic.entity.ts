@@ -6,7 +6,7 @@ export interface AcademicProps {
   phone: string,
   RA: string,
   password: string,
-  created_at?: Date, 
+  date_created?: Date, 
 }
 
 export class Academic {
@@ -16,8 +16,8 @@ export class Academic {
     this.props = {
       ...props,
       id: id ?? props.id, 
-      active: props.active ?? true, // Valor padrão
-      created_at: props.created_at ?? new Date(), // Valor padrão
+      active: props.active ?? true, 
+      date_created: props.date_created ?? new Date(), 
     }
   }
 
@@ -29,7 +29,7 @@ export class Academic {
     return this.props.name
   }
 
-  set name(name: string) {
+  public updateName(name: string) {
     if (name.length < 3) {
       throw new Error('O nome deve ter pelo menos 3 caracteres.')
     }
@@ -40,7 +40,7 @@ export class Academic {
     return this.props.email
   }
 
-  set email(email: string) {
+  public updateEmail(email: string) {
     if (!email.includes('@')) {
       throw new Error('Invalid email format.')
     }
@@ -63,7 +63,7 @@ export class Academic {
     return this.props.phone
   }
 
-  set phone(phone: string) {
+  public updatePhone(phone: string) {
     this.props.phone = phone
   }
 
@@ -71,14 +71,12 @@ export class Academic {
     return this.props.RA
   }
 
-  set RA(RA: string) {
+  public updateRA(RA: string) {
     this.props.RA = RA
   }
 
-  // Não expor o setter de senha diretamente se for hasheada.
-
-  get created_at(): Date {
-    return this.props.created_at!
+  get date_created(): Date {
+    return this.props.date_created!
   }
 
   // Método para converter a entidade para um objeto simples (DTO ou para persistência)

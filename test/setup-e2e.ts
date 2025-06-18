@@ -30,7 +30,7 @@ beforeAll(async () =>{
 })
 
 afterAll(async () =>{
-    await prisma.$executeRawUnsafe(`DROP SCHEMA IF EXISTS "${schemaId}" CASCADE`)
+    await prisma.$executeRawUnsafe(`DROP SCHEMA IF EXISTS "${scv vbhemaId}" CASCADE`)
     await prisma.$disconnect()
     
     console.log('Database droped')

@@ -3,7 +3,7 @@ export interface LaboratoryProps{
     local?: string,      
     total_capacity: number, 
     available_capacity: number,             
-    created_at?: Date,  
+    date_created?: Date,  
     last_updated?: Date
 }
 
@@ -15,7 +15,7 @@ export class Laboratory {
             ...props,
             id: id ?? props.id,
             local: props.local,
-            created_at: props.created_at ?? new Date(),
+            date_created: props.date_created ?? new Date(),
             last_updated: props.last_updated ?? new Date()
         }
 
@@ -35,7 +35,7 @@ export class Laboratory {
         return this.props.local
     }
 
-    set local(local: string) {
+    public publicLocal(local: string) {
         this.props.local = local
     }
 
@@ -43,7 +43,7 @@ export class Laboratory {
         return this.props.total_capacity
     }
 
-    set totalCapacity(totalCapacity: number){
+    public publicaTotalCapacity(totalCapacity: number){
         this.props.total_capacity = totalCapacity
     }
 
@@ -51,7 +51,7 @@ export class Laboratory {
         return this.props.available_capacity
     }
 
-    set availableCapacity(availableCapacity: number){
+    public publicAvailableCapacity(availableCapacity: number){
         this.props.available_capacity = availableCapacity
     }
 

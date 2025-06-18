@@ -22,7 +22,7 @@ describe('Authenticate (E2E)', () => {
       });
 
     test('[POST] /sessions', async () => {
-        await prisma.academics.create({
+        await prisma.academic.create({
             data:{
                 name: 'Jhon Doe',
                 email: 'Jhon@example.com',

@@ -1,11 +1,11 @@
 export interface EventProps{
     id?: string,
-    created_by?: string,
+    created_by: string,
     title: string,
-    date: Date,
+    event_date: Date,
     description: string,
-    created_at: Date,
-    is_active: boolean,
+    date_created?: Date,
+    is_active?: boolean,
 }
 
 export class Event {
@@ -15,41 +15,57 @@ export class Event {
         this.props = {
             ...props,
             id: id ?? props.id,
-            created_at: props.created_at ?? new Date(),
+            date_created: props.date_created ?? new Date(),
             is_active: props.is_active ?? true,
         }
     }
 
-    get id(): string | undefined {
-        return this.props.id
+    get id(): string {
+        return this.props.id!
     }
 
-    get created_by(): string | undefined {
-        return this.props.created_by
+    get created_by(): string{
+        return this.props.created_by!
     }
 
     get title(): string {
         return this.props.title
     }
 
-    set title(title: string) {
+    public updateTitle(title: string) {
         this.props.title = title
     }
 
     get date(): Date {
-        return this.props.date
+        return this.props.event_date
     }
 
-    set date(date: Date){
-        this.props.date = date
+    public updateDate(newDate: Date){
+        this.props.event_date = newDate
     }
 
     get description(): string {
         return this.props.description
     }
 
-    set description(description: string) {
+    public updateDescription(description: string) {
         this.props.description = description
+    }
+
+    get eventDate(): Date{
+        return this.props.event_date
+    }
+
+    public updateEventDate(newDate: Date){
+        this.props.event_date = newDate
+    }
+
+    get dateCreated(): Date{
+        return this.props.date_created!
+    }
+
+    get isActive(): boolean{
+        return this.props.is_active!
     }
 
     activate(): void {

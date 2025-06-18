@@ -1,4 +1,4 @@
-import { Academic } from '../../entities/academic.entity';
+import { Academic } from '@/core/entities/academic.entity';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { AcademicRepository, ACADEMIC_REPOSITORY } from '../../repositories/academic.repository';
 
@@ -6,7 +6,7 @@ import { AcademicRepository, ACADEMIC_REPOSITORY } from '../../repositories/acad
 export class FindAcademicUseCase {
   constructor(
     @Inject(ACADEMIC_REPOSITORY)
-    private academicRepository: AcademicRepository,
+    private academicRepository: AcademicRepository
   ) {}
 
   async findById(id: string): Promise<Academic> {
@@ -22,7 +22,7 @@ export class FindAcademicUseCase {
 
   async findByEmail(email: string): Promise<Academic> {
     
-    const academicExists = await this.academicRepository.findById(email)
+    const academicExists = await this.academicRepository.findByEmail(email)
 
     if(!academicExists){
         throw new NotFoundException ('Academic email not found.')
@@ -33,7 +33,7 @@ export class FindAcademicUseCase {
 
   async findByPhone(phone: string): Promise<Academic> {
     
-    const academicExists = await this.academicRepository.findById(phone)
+    const academicExists = await this.academicRepository.findByPhone(phone)
 
     if(!academicExists){
         throw new NotFoundException ('Academic phone not found.')

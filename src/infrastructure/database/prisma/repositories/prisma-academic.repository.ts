@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service'; 
-import { Academic as PrismaAcademicModel } from '@prisma/client'; // Tipo gerado pelo Prisma
+import { Academic as PrismaAcademicModel } from '@prisma/client';
 import { Academic, AcademicProps } from '../../../../core/entities/academic.entity'; 
 import { AcademicRepository } from '../../../../core/repositories/academic.repository'; 
 
@@ -17,14 +17,34 @@ export class PrismaAcademicRepository implements AcademicRepository {
       {
         name: prismaAcademic.name,
         email: prismaAcademic.email,
-        active: prismaAcademic.active,
+        active: prismaAcademic.is_active,
         phone: prismaAcademic.phone,
         RA: prismaAcademic.RA,
         password: prismaAcademic.password,
-        created_at: prismaAcademic.created_at,
+        date_created: prismaAcademic.date_created,
       },
       prismaAcademic.id,
     );
+  }
+
+  async create(data: AcademicProps): Promise<Academic> {
+    const createdAcademicData = await this.prisma.academic.create({
+      data: {
+        name: data.name,
+        email: data.email,
+        is_active: data.active ?? true, 
+        phone: data.phone,
+        RA: data.RA,
+        password: data.password, 
+      },
+    });
+
+    const domainEntity = this.toDomain(createdAcademicData);
+    if (!domainEntity) {
+        throw new Error('Falha ao mapear entidade criada para o domínio.');
+    }
+    
+    return domainEntity;
   }
 
   async findById(id: string): Promise<Academic | null> {
@@ -52,25 +72,6 @@ export class PrismaAcademicRepository implements AcademicRepository {
     return academicsData.map(data => this.toDomain(data)).filter(Boolean) as Academic[];
   }
 
-  async create(data: AcademicProps): Promise<Academic> {
-    const createdAcademicData = await this.prisma.academic.create({
-      data: {
-        name: data.name,
-        email: data.email,
-        active: data.active ?? true, 
-        phone: data.phone,
-        RA: data.RA,
-        password: data.password, 
-      },
-    });
-
-    const domainEntity = this.toDomain(createdAcademicData);
-    if (!domainEntity) {
-        throw new Error('Falha ao mapear entidade criada para o domínio.');
-    }
-    return domainEntity;
-  }
-
   async update(id: string, data: Partial<AcademicProps>): Promise<Academic | null> {
     try {
       const updatedAcademicData = await this.prisma.academic.update({
@@ -78,10 +79,10 @@ export class PrismaAcademicRepository implements AcademicRepository {
         data: {
           name: data.name,
           email: data.email,
-          active: data.active,
+          is_active: data.active,
           phone: data.phone,
           RA: data.RA,
-          password: data.password, // Se a senha puder ser atualizada, deve vir hasheada
+          password: data.password, 
         },
       });
       return this.toDomain(updatedAcademicData);
@@ -92,9 +93,7 @@ export class PrismaAcademicRepository implements AcademicRepository {
 
   async delete(id: string): Promise<boolean> {
     try {
-      await this.prisma.academic.delete({
-        where: { id },
-      });
+      await this.prisma.academic.delete({ where: { id } });
       return true;
     } catch (error) {
       console.error("Erro ao deletar Academic no Prisma:", error);

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Academic } from '../../../../../core/entities/academic.entity'; // Sua entidade de domínio
+import { Academic } from '../../../../../core/entities/academic.entity';
 
 // Esquema Zod para a resposta (útil para consistência e documentação)
 export const AcademicResponseSchema = z.object({
@@ -9,7 +9,7 @@ export const AcademicResponseSchema = z.object({
   active: z.boolean(),
   phone: z.string(),
   RA: z.string(),
-  created_at: z.date(),
+  date_created: z.date(),
 });
 
 export type AcademicResponseDto = z.infer<typeof AcademicResponseSchema>;
@@ -23,6 +23,6 @@ export function toAcademicResponseDto(academic: Academic): AcademicResponseDto {
     active: academic.active,
     phone: academic.phone,
     RA: academic.RA,
-    created_at: academic.created_at,
+    date_created: academic.date_created,
   };
 }

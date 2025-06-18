@@ -1,5 +1,5 @@
-import { ConflictException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Academic, AcademicProps } from '../../entities/academic.entity';
+import { ConflictException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { AcademicRepository, ACADEMIC_REPOSITORY } from '../../repositories/academic.repository';
 
 @Injectable()
@@ -9,7 +9,7 @@ export class UpdateAcademicUseCase {
     private academicRepository: AcademicRepository,
   ) {}
 
-  async execute(id: string, data: Partial<Pick<Academic, 'name' | 'email' | 'phone' | 'RA' | 'active'>>): Promise<Academic> {
+  async execute(id: string, data: Partial<Pick<AcademicProps, 'name' | 'email' | 'phone' | 'RA' | 'active'>>): Promise<Academic> {
     
     const academicToUpdate = await this.academicRepository.findById(id)
     if(!academicToUpdate){
@@ -40,7 +40,7 @@ export class UpdateAcademicUseCase {
     const updatedAcademic = await this.academicRepository.update(id, data);
 
     if (!updatedAcademic) {
-        throw new NotFoundException(`Falha ao atualizar o acadêmico com ID '${id}'. O registro pode não existir mais ou a atualização não resultou em alterações.`);
+        throw new NotFoundException(`Failed to update scholar with ID '${id}'. The record may no longer exist or the update resulted in no changes.`);
     }
     
     return updatedAcademic;

@@ -10,7 +10,7 @@ export class CreateAcademicUseCase {
     private academicRepository: AcademicRepository,
   ) {}
 
-  async execute(data: Omit<AcademicProps, 'id' | 'created_at' | 'active'>): Promise<Academic> {
+  async execute(data: Omit<AcademicProps, 'id' | 'date_created' | 'is_active'>): Promise<Academic> {
     
     const emailExists = await this.academicRepository.findByEmail(data.email)
     if (emailExists){

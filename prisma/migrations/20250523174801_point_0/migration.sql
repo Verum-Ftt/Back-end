@@ -82,7 +82,7 @@ CREATE TABLE "qrCodes" (
     "student_id" TEXT NOT NULL,
     "event_id" TEXT NOT NULL,
     "laboratory_id" TEXT,
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "date_created" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
     "image" TEXT NOT NULL,
     "valid" BOOLEAN NOT NULL DEFAULT true,
